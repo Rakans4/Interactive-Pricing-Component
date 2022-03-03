@@ -2,14 +2,8 @@ import React from "react";
 import { useState, useEffect } from "react";
 import {
   Switch,
-  Slider,
-  SliderTrack,
-  SliderFilledTrack,
-  SliderThumb,
-  Box,
   Divider,
 } from "@chakra-ui/react";
-import { CheckIcon } from "@chakra-ui/icons";
 
 function Pricings() {
   const [pricings] = useState([
@@ -38,6 +32,7 @@ function Pricings() {
   const [selectedPricing, setSelectedPricing] = useState({
     pageViews: "100K",
     price: 16,
+    range: 3
   });
 
   const [pricingDisplay, setPricingDisplay] = useState(
@@ -49,6 +44,7 @@ function Pricings() {
   );
 
   useEffect(() => {
+    console.log('range '+selectedPricing.range)
     setPricingDisplay(
       `${
         billingTerm === "yearly"
@@ -68,6 +64,7 @@ function Pricings() {
     setSelectedPricing({
       pageViews: pricings[e.target.value - 1].pageViews,
       price: pricings[e.target.value - 1].price,
+      range: e.target.value
     });
   }
 
@@ -78,40 +75,40 @@ function Pricings() {
 
   return (
     <div>
-      <div className="p-12">
-        <div className="flex flex-wrap">
-          <div className="text-GrayishBlue w-1/2 flex items-center tracking-widest font-semibold">
+      <div className="p-12 mobile:p-8">
+        <div className="flex flex-wrap mobile:justify-center">
+          <div className="text-GrayishBlue w-1/2 flex items-center tracking-widest font-semibold mobile:order-1 mobile:justify-center mobile:w-full">
             {selectedPricing.pageViews} PAGEVIEWS
           </div>
-          <div className="text-DarkDesaturatedBlue text-4xl font-semibold w-1/2 flex items-center justify-end">
-            ${pricingDisplay}{" "}
+          <div className="text-DarkDesaturatedBlue text-4xl font-semibold w-1/2 mobile:w-2/3 flex items-center mobile:justify-center justify-end mobile:order-3">
+            ${pricingDisplay}
             <span className="text-GrayishBlue text-base align-middle">
-              {" "}
               &nbsp;&nbsp;/ month
             </span>
           </div>
-          <div className="my-4 w-full">
+          <div className="my-4 w-full mobile:order-2">
             <input
               className="slider"
-              onClick={changePrice}
+              onChange={changePrice}
               type="range"
               max={pricings.length}
               min="1"
+              value={selectedPricing.range}
             ></input>
           </div>
         </div>
-        <div className="flex items-center justify-end mt-6">
+        <div className="flex items-center justify-end mt-6 mobile:text-[0.85rem]">
           <div className="text-GrayishBlue">Monthly Billing</div>
-          <Switch className="mx-4" onChange={changeBillingTerm} />
+          <Switch colorScheme='cyan' className="mx-4" onChange={changeBillingTerm} />
           <div className="text-GrayishBlue">Yearly Billing</div>
           <div className="bg-LightGrayishRed text-LightRed px-2 rounded-lg text-xs font-semibold ml-2">
-            25% <span>discount</span>
+            25% <span className="mobile:hidden">discount</span>
           </div>
         </div>
       </div>
       <Divider />
-      <div className="flex justify-between items-center p-12">
-        <div>
+      <div className="flex mobile:flex-col mobile:justify-between mobile:p-8 justify-between items-center p-12">
+        <div className="flex flex-col items-center justify-center">
           <div class="flex items-center">
             <svg xmlns="http://www.w3.org/2000/svg" width="9" height="8">
               <path
@@ -123,7 +120,7 @@ function Pricings() {
             </svg>
             <span className="ml-4">Unlimited websites</span>
           </div>
-          <div class="flex items-center">
+          <div class="flex items-center mobile:mt-2">
             <svg xmlns="http://www.w3.org/2000/svg" width="9" height="8">
               <path
                 fill="none"
@@ -134,7 +131,7 @@ function Pricings() {
             </svg>
             <span className="ml-4">100% data ownership</span>
           </div>
-          <div class="flex items-center">
+          <div class="flex items-center mobile:mt-2">
             <svg xmlns="http://www.w3.org/2000/svg" width="9" height="8">
               <path
                 fill="none"
@@ -146,7 +143,7 @@ function Pricings() {
             <span className="ml-4">Email reports</span>
           </div>
         </div>
-        <button className="h-10 w-40 rounded-full text-PaleBlue bg-DarkDesaturatedBlue hover:text-white">
+        <button className="h-10 w-40 rounded-full mobile:mt-8 text-PaleBlue bg-DarkDesaturatedBlue hover:text-white">
           Start my trial
         </button>
       </div>

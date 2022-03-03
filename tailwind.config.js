@@ -2,6 +2,9 @@ module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     extend: {
+      screens: {
+        'mobile': {'max': '660px'}
+      },
       colors: {
         SoftCyan: "hsl(174, 77%, 80%)", //(Full Slider Bar)
         LightGrayishBlue: "hsl(224, 65%, 95%)", //(Empty Slider Bar)
