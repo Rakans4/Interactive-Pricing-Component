@@ -7,15 +7,16 @@ import Pricings from "./components/pricings";
 
 const theme = extendTheme({
   colors: {
-    StrongCyan: {
-      100: "#10d5c2",
+    cyan: {
+      500: "#10d5c2",
     },
   },
 })
 function App() {
+  console.log(theme);
   return (
     <ChakraProvider theme={theme}>
-      <div className="h-screen w-screen bg-VeryPaleBlue bg-[url('/src/assets/bg-pattern.svg')] bg-no-repeat bg-contain">
+      <div className="h-screen w-screen bg-VeryPaleBlue bg-[url('/src/assets/bg-pattern.svg')] bg-no-repeat bg-auto">
         <div className="flex flex-col items-center">
           <Header />
           <Card>
